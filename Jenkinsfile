@@ -7,9 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Setup'){
-        
-        }
         stage('Build') {
             steps {
                 // Run Maven on a Unix agent.
@@ -27,7 +24,7 @@ pipeline {
                     archiveArtifacts 'target/*.jar'
                 }
             }
-        }
+        
         stage('Package'){
             steps {
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"

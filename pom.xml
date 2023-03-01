@@ -1,4 +1,6 @@
-<modelVersion>4.0.0</modelVersion>
+<project>
+
+  <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.qa</groupId>
   <artifactId>hello-scalatra-new</artifactId>

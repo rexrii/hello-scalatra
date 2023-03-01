@@ -1,0 +1,12 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello Dino</title>
+  </head>
+  <body>
+ <h2>Hello!</h2>
+<img src="all_dino.png"/>
+  </body>
+</html>

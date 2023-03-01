@@ -63,6 +63,7 @@
         </plugins>
     </build>
    
+   <dependencies>
         <dependency>
             <groupId>org.eclipse.jetty.orbit</groupId>
             <artifactId>javax.servlet</artifactId>

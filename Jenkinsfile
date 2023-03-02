@@ -1,26 +1,37 @@
-pipeline {
-    agent any
-
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "M3"
+pipeline{
+    environment {
+        registry = "paulmercer/hello-pipeline"
+        registryCredentials = "dockerhub"
+        dockerImage = ""
     }
 
-    stages {
-        stage('Build') {
-            steps {
-                // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true clean compile"
-
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+    agent any   
+        stages {
+            stage ('Build Docker Image'){
+                steps{
+                    script {
+                        dockerImage = docker.build(registry)
+                    }
+                }
             }
-	}
-        
-        stage('Package'){
-            steps {
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
-        }
-    }
-}
+
+            stage ("Push to Docker Hub"){
+                steps {
+                    script {
+                        docker.withRegistry('', registryCredentials) {
+                            dockerImage.push("${env.BUILD_NUMBER}")
+                            dockerImage.push("latest")                    
+                        }
+                    }
+                }
+            }
+
+            stage ("Clean up"){
+                steps {
+                    script {
+                        sh 'docker image prune --all --force --filter "until=168h"'
+                           }
+                }
+            }            
+        }       
 }

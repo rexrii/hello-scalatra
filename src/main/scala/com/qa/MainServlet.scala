@@ -3,7 +3,7 @@ package com.qa
 import org.scalatra.ScalatraServlet
 import org.scalatra.scalate.ScalateSupport
 
-// File Edited by Alex
+// File Edited by Alex Lee
 
 class MainServlet extends ScalatraServlet with ScalateSupport {
   before() {
